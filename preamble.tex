@@ -1,0 +1,153 @@
+%%% The preamble.tex contains all packages, defines custom commands and environments, and holds various configurations
+
+%% Packages
+%% -----------------------------------------------------------------
+% Base packages
+\usepackage[T1]{fontenc}            % use 8-bit T1 fonts
+\usepackage[utf8]{inputenc}         % allow utf-8 input
+\usepackage[round]{natbib}          % bibliography package
+\usepackage[colorlinks=true,citecolor=blue,urlcolor=blue,linkcolor=black]{hyperref}               % insert clickable hyperlinks
+\usepackage{xpatch}                 % macro patching commands
+
+% Math packages
+\usepackage{mathtools}              % math commands and environments
+\usepackage{amssymb}                % additional math symbols
+\usepackage{amsthm}                 % theorem environments
+\usepackage{bm}                     % improved bold faces for math symbols
+\usepackage{mathrsfs}               % mathscr symbols
+
+% Figure packages
+\usepackage{graphicx}               % handling of images
+\usepackage{booktabs}               % improved tables
+\usepackage{listings}               % source code listings
+\usepackage{tikz}                   % drawing vector graphics
+
+\usepackage{caption}                % custimisation of captions
+\usepackage{subcaption}             % for grouping figures together
+
+% Styling packages
+\usepackage{microtype}              % microtyphography
+\usepackage{emptypage}              % supresses page numbering on empty pages
+\usepackage[margin=3cm]{geometry}   % adjust page margins
+\usepackage{enumitem}               % better list environments
+\usepackage{cleveref}               % enchances LATEX's cross-referencing features
+\usepackage{tocbibind}              % include bibliography in table of contents
+
+\usepackage{fancyhdr}               % easy customisation of headers and footers
+\usepackage{titlesec}               % easy customisation of section titles
+
+% Font packages, Times New Roman
+\ifdefined\TimesFont
+\usepackage{times}
+\fi
+
+% Paragraph skip
+\ifdefined\ParSkip
+\usepackage{parskip}
+\fi
+%% -----------------------------------------------------------------
+
+%% Custom commands and environments
+%% -----------------------------------------------------------------
+% Theorem environments
+\theoremstyle{plain}                 % bold title, italic body text
+\newtheorem{thm}{Theorem}            % theorems
+\newtheorem{prop}[thm]{Proposition}  % propositions, numbered like theorems
+\newtheorem{lem}[thm]{Lemma}         % lemmas, numbered like theorems
+\newtheorem{cor}[thm]{Corollary}     % corollaries, numbered like theorems
+
+\theoremstyle{definition}            % bold title, upright body text
+\newtheorem{defn}[thm]{Definition}   % definitions, numbered like theorems
+\newtheorem{remark}{Remark}          % remarks, seperate numbering
+\newtheorem{exmp}[thm]{Example}      % examples, numbered like theorems
+
+% Miscellaneous
+\newcommand{\size}[2]{{\fontsize{#1}{0}\selectfont#2}}      % custom fontsize of headings; e.g. usage, \section[TOC Title]{\size{15}{Diplayed Title}}
+\renewcommand\qedsymbol{$\blacksquare$}                     % tombstone symbol as q.e.d
+
+% Fix for spacing around adjusted parentheses
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+% Widebar
+\makeatletter
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+\newcommand*\widebar[1]{%
+  \begingroup
+  \def\mathaccent##1##2{%
+    \rel@kern{0.8}%
+    \overline{\rel@kern{-0.8}\macc@nucleus\rel@kern{0.2}}%
+    \rel@kern{-0.2}%
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+  \macc@nested@a\relax111{#1}%
+  \endgroup
+}
+\makeatother
+
+% Shortcuts
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\st}{subject\,\,to}
+
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\E{\mathbb{E}}
+\def\P{\mathbb{P}}
+%% -----------------------------------------------------------------
+
+%% Various configurations
+%% -----------------------------------------------------------------
+% Hide TOC's heading
+\makeatletter
+\renewcommand\tableofcontents{%
+    \@starttoc{toc}%
+}
+\makeatother
+
+% Rename 'Bibliography' to 'References'
+\renewcommand{\bibname}{References}
+
+% Format figure captions
+% http://mirrors.dotsrc.org/ctan/macros/latex/contrib/caption/caption-eng.pdf
+\captionsetup{font=it,labelfont=bf}
+
+% Source code style
+% https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+\lstdefinestyle{custompy}{
+  belowcaptionskip=\baselineskip,
+  breaklines=true,
+  language=R,
+  %numbers=left,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\color{black},
+  %backgroundcolor=\color{gray!10},
+  commentstyle=\color{black},
+  stringstyle=\color{black},
+  otherkeywords={},
+  morekeywords={},
+  deletekeywords={}
+}
+\lstset{language=R,style=custompy,captionpos=b}
+\renewcommand{\lstlistingname}{Listing}
+\renewcommand{\lstlistlistingname}{List of Listings}
+
+% Autoref settings
+% https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing#autoref
+\def\partautorefname{Part}
+\def\chapterautorefname{Chapter}
+\def\sectionautorefname{Section}
+\def\subsectionautorefname{Subsection}
+\def\figureautorefname{Figure}
+\def\tableautorefname{Table}
+\def\lstinputlistingautorefname{Listing}
+%% -----------------------------------------------------------------
