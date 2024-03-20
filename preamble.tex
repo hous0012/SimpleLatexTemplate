@@ -1,69 +1,104 @@
-%%% The preamble.tex contains all packages, defines custom commands and environments, and holds various configurations
+% The preamble.tex contains all packages, defines custom commands and environments, and holds various configurations
+% Add or remove packages according to the needs of your specific document.
+% ------------------------------------------------------------------------------
 
-%% Packages
-%% -----------------------------------------------------------------
-% Base packages
-\usepackage[T1]{fontenc}            % use 8-bit T1 fonts
-\usepackage[utf8]{inputenc}         % allow utf-8 input
-\usepackage[round]{natbib}          % bibliography package
-\usepackage[colorlinks=true,citecolor=blue,urlcolor=blue,linkcolor=black]{hyperref}               % insert clickable hyperlinks
-\usepackage{xpatch}                 % macro patching commands
+% Base Configuration -----------------------------------------------------------
+\usepackage[T1]{fontenc}          % Use 8-bit T1 fonts for better language support
+\usepackage[utf8]{inputenc}       % Allow utf-8 input for international characters
+\usepackage[round]{natbib}        % Bibliography management with round parentheses
+\usepackage[colorlinks=true, citecolor=blue, urlcolor=blue, linkcolor=black]{hyperref} % Clickable hyperlinks with custom colors
 
-% Math packages
-\usepackage{mathtools}              % math commands and environments
-\usepackage{amssymb}                % additional math symbols
-\usepackage{amsthm}                 % theorem environments
-\usepackage{bm}                     % improved bold faces for math symbols
-\usepackage{mathrsfs}               % mathscr symbols
+% Math Packages -----------------------------------------------------------------
+\usepackage{mathtools}            % Extended math commands from AMS
+\usepackage{amssymb}				% Additional math symbols
+\usepackage{amsthm}					% Theorem environments
+\usepackage{bm}						% Bold math symbols via \bm command
 
-% Figure packages
-\usepackage{graphicx}               % handling of images
-\usepackage{booktabs}               % improved tables
-\usepackage{listings}               % source code listings
-\usepackage{tikz}                   % drawing vector graphics
+% Styling and Formatting --------------------------------------------------------
+\usepackage{enumitem}				% Enhanced list environments (itemize, enumerate, description)
+\usepackage{tocbibind}				% Include bibliography/index/contents in Table of Contents
 
-\usepackage{caption}                % custimisation of captions
-\usepackage{subcaption}             % for grouping figures together
+% Optional: Modify margins, spacing, and headers/footers
+% Uncomment to use, and adjust values as needed
+\usepackage[margin=1in]{geometry}  % Set page margins
+%\usepackage{parskip}              % Add space between paragraphs, remove indentations
+%\usepackage{setspace}             % Line spacing
+%\usepackage{fancyhdr}             % Custom headers and footers
 
-% Styling packages
-\usepackage{microtype}              % microtyphography
-\usepackage{emptypage}              % supresses page numbering on empty pages
-\usepackage[margin=3cm]{geometry}   % adjust page margins
-\usepackage{enumitem}               % better list environments
-\usepackage{cleveref}               % enchances LATEX's cross-referencing features
-\usepackage{tocbibind}              % include bibliography in table of contents
+% Figures and Tables ------------------------------------------------------------
+\usepackage{graphicx}             % Enhanced support for graphics
+\usepackage{subcaption}           % Support for sub-figures and sub-captions
+\usepackage{booktabs}             % Publication quality tables
+\usepackage{multirow}             % Support for multi-row cells in tables
 
-\usepackage{fancyhdr}               % easy customisation of headers and footers
-\usepackage{titlesec}               % easy customisation of section titles
+% Optional: Advanced tables and figures
+% Uncomment to use, and adjust as needed
+%\usepackage{tabularx}             % Advanced table features
+%\usepackage{longtable}            % Multi-page tables
 
-% Font packages, Times New Roman
-\ifdefined\TimesFont
-\usepackage{times}
-\fi
+% Algorithms --------------------------------------------------------------------
+\usepackage{algorithm}            % Float wrapper for algorithms
+\usepackage{algorithmic}          % Algorithm typesetting environment
 
-% Paragraph skip
-\ifdefined\ParSkip
-\usepackage{parskip}
-\fi
-%% -----------------------------------------------------------------
+% Code Listings (optional) ------------------------------------------------------
+% Uncomment to use the listings package for code snippets
+%\usepackage{listings}             % Source code listings
+%\lstset{
+	%    basicstyle=\ttfamily\small,
+	%    frame=single,
+	%    breaklines=true,
+	%    captionpos=b,
+	%}
 
-%% Custom commands and environments
-%% -----------------------------------------------------------------
-% Theorem environments
-\theoremstyle{plain}                 % bold title, italic body text
-\newtheorem{thm}{Theorem}            % theorems
-\newtheorem{prop}[thm]{Proposition}  % propositions, numbered like theorems
-\newtheorem{lem}[thm]{Lemma}         % lemmas, numbered like theorems
-\newtheorem{cor}[thm]{Corollary}     % corollaries, numbered like theorems
+% Glossaries and Acronyms (optional) --------------------------------------------
+% Uncomment to use, adjust settings as needed
+%\usepackage[acronym]{glossaries}  % Create glossaries and lists of acronyms
+%\makeglossaries
 
-\theoremstyle{definition}            % bold title, upright body text
-\newtheorem{defn}[thm]{Definition}   % definitions, numbered like theorems
-\newtheorem{remark}{Remark}          % remarks, seperate numbering
-\newtheorem{exmp}[thm]{Example}      % examples, numbered like theorems
+% Cross-referencing -------------------------------------------------------------
+% Uncomment to enhance cross-referencing capabilities
+%\usepackage[nameinlink]{cleveref} % Intelligent cross-referencing
 
-% Miscellaneous
-\newcommand{\size}[2]{{\fontsize{#1}{0}\selectfont#2}}      % custom fontsize of headings; e.g. usage, \section[TOC Title]{\size{15}{Diplayed Title}}
-\renewcommand\qedsymbol{$\blacksquare$}                     % tombstone symbol as q.e.d
+% Font Customization (optional) -------------------------------------------------
+% Uncomment to switch to Times New Roman, or customize as needed
+%\usepackage{times}                % Times New Roman font
+
+% Custom Theorem Environments ---------------------------------------------------
+\theoremstyle{plain}                 % Bold title, italic body text
+\newtheorem{thm}{Theorem}            % Theorems
+\newtheorem{prop}[thm]{Proposition}  % Propositions, numbered like theorems
+\newtheorem{lem}[thm]{Lemma}         % Lemmas, numbered like theorems
+\newtheorem{cor}[thm]{Corollary}     % Corollaries, numbered like theorems
+
+\theoremstyle{definition}            % Bold title, upright body text
+\newtheorem{defn}[thm]{Definition}   % Definitions, numbered like theorems
+\newtheorem{remark}{Remark}          % Remarks, separate numbering
+\newtheorem{exmp}[thm]{Example}      % Examples, numbered like theorems
+
+% Custom Commands and Shortcuts -------------------------------------------------
+% Custom font size for headings
+% Usage example: \section[TOC Title]{\size{15}{Displayed Title}}
+\newcommand{\size}[2]{{\fontsize{#1}{0}\selectfont#2}}
+
+% Custom wide bar for math symbols
+\makeatletter
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+\newcommand*\widebar[1]{%
+	\begingroup
+	\def\mathaccent##1##2{%
+		\rel@kern{0.8}%
+		\overline{\rel@kern{-0.8}\macc@nucleus\rel@kern{0.2}}%
+		\rel@kern{-0.2}%
+	}%
+	\macc@depth\@ne
+	\let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+	\mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+	\macc@set@skewchar\relax
+	\let\mathaccentV\macc@nested@a
+	\macc@nested@a\relax111{#1}%
+	\endgroup
+}
+\makeatother
 
 % Fix for spacing around adjusted parentheses
 \let\originalleft\left
@@ -71,27 +106,14 @@
 \renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
 \renewcommand{\right}{\aftergroup\egroup\originalright}
 
-% Widebar
+% Hide TOC's heading
 \makeatletter
-\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
-\newcommand*\widebar[1]{%
-  \begingroup
-  \def\mathaccent##1##2{%
-    \rel@kern{0.8}%
-    \overline{\rel@kern{-0.8}\macc@nucleus\rel@kern{0.2}}%
-    \rel@kern{-0.2}%
-  }%
-  \macc@depth\@ne
-  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
-  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
-  \macc@set@skewchar\relax
-  \let\mathaccentV\macc@nested@a
-  \macc@nested@a\relax111{#1}%
-  \endgroup
+\renewcommand\tableofcontents{%
+	\@starttoc{toc}%
 }
 \makeatother
 
-% Shortcuts
+% Mathematical shortcuts
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator{\st}{subject\,\,to}
@@ -102,52 +124,10 @@
 \def\Z{\mathbb{Z}}
 \def\E{\mathbb{E}}
 \def\P{\mathbb{P}}
-%% -----------------------------------------------------------------
 
-%% Various configurations
-%% -----------------------------------------------------------------
-% Hide TOC's heading
-\makeatletter
-\renewcommand\tableofcontents{%
-    \@starttoc{toc}%
-}
-\makeatother
+% Miscellaneous Configurations
+\renewcommand\qedsymbol{$\blacksquare$}                     % Custom QED symbol
+\renewcommand{\bibname}{References}                         % Rename bibliography
+\captionsetup{font=it,labelfont=bf}                         % Format figure captions
 
-% Rename 'Bibliography' to 'References'
-\renewcommand{\bibname}{References}
-
-% Format figure captions
-% http://mirrors.dotsrc.org/ctan/macros/latex/contrib/caption/caption-eng.pdf
-\captionsetup{font=it,labelfont=bf}
-
-% Source code style
-% https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
-\lstdefinestyle{custompy}{
-  belowcaptionskip=\baselineskip,
-  breaklines=true,
-  language=R,
-  %numbers=left,
-  showstringspaces=false,
-  basicstyle=\footnotesize\ttfamily,
-  keywordstyle=\color{black},
-  %backgroundcolor=\color{gray!10},
-  commentstyle=\color{black},
-  stringstyle=\color{black},
-  otherkeywords={},
-  morekeywords={},
-  deletekeywords={}
-}
-\lstset{language=R,style=custompy,captionpos=b}
-\renewcommand{\lstlistingname}{Listing}
-\renewcommand{\lstlistlistingname}{List of Listings}
-
-% Autoref settings
-% https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing#autoref
-\def\partautorefname{Part}
-\def\chapterautorefname{Chapter}
-\def\sectionautorefname{Section}
-\def\subsectionautorefname{Subsection}
-\def\figureautorefname{Figure}
-\def\tableautorefname{Table}
-\def\lstinputlistingautorefname{Listing}
-%% -----------------------------------------------------------------
+% -----------------------------------------------------------------------------------
